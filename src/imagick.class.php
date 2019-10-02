@@ -1,6 +1,7 @@
 <?php
 namespace  Tiki;
 
+
 class Imagick {
 
     public $obj = null;
