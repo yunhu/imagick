@@ -1,10 +1,12 @@
 <?php
-namespace  Tiki;
+namespace  IM;
 
 class Imagick {
 
     public $obj = null;
     public $quality = 60;
+    public $limit = 3;
+
     public function __construct()
     {
         if(class_exists('Imagick')){
@@ -17,12 +19,22 @@ class Imagick {
      * @param $realyQality
      * @param int $wantQality 默认是3* 1024 *1024 3M
      */
-    public function getQuality($realyQality,$wantQality=3145728 ){
+    public function getQuality($realyQality,$wantQality=0 ){
+        if(!$wantQality) {
+            $wantQality = $this->limit * 1024 * 1024;
+        }else{
+            $this->limit = $wantQality;
+        }
+
         $this->quality = round($wantQality /$realyQality,2 ) * 100;
     }
 
-    public function compress($srcImg,$quality = '',$destImg = '')
+    public function compress($srcImg,$destImg = '',$quality = '')
     {
+        if(filesize($srcImg) < $this->limit * 1024  * 1024){
+            return $srcImg;
+        }
+
         if(!is_object($this->obj))
         {
             return false;
