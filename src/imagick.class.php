@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: zhangyunhu
- * Date: 2019/10/2
- * Time: 6:58 PM
- */
 namespace  Tiki;
 
 class Imagick {
