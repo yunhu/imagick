@@ -1,6 +1,7 @@
 <?php
 namespace  IM;
 
+
 class Imagick {
 
     public $obj = null;
