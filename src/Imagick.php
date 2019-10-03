@@ -1,5 +1,5 @@
 <?php
-namespace  IM;
+namespace  Tiki;
 
 
 class Imagick {
@@ -21,13 +21,15 @@ class Imagick {
      * @param int $wantQality 默认是3* 1024 *1024 3M
      */
     public function getQuality($realyQality,$wantQality=0 ){
-        if(!$wantQality) {
-            $wantQality = $this->limit * 1024 * 1024;
-        }else{
-            $this->limit = $wantQality;
-        }
 
-        $this->quality = round($wantQality /$realyQality,2 ) * 100;
+        if($realyQality) {
+            if (!$wantQality) {
+                $wantQality = $this->limit * 1024 * 1024;
+            } else {
+                $this->limit = $wantQality;
+            }
+            $this->quality = round($wantQality / $realyQality, 2) * 100;
+        }
     }
 
     public function compress($srcImg,$destImg = '',$quality = '')
@@ -47,7 +49,7 @@ class Imagick {
             }
 
             if(empty($destImg)){
-                $destImg = '/tmp/'.mt_rand(1,100).'.jpeg';
+                $destImg = '/tmp/'.md5(time().mt_rand(1,10000)).'.jpeg';
             }
             $destImg = empty($destImg) ? $srcImg : $destImg;
             $this->obj->readImage($srcImg);
