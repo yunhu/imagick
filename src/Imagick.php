@@ -32,7 +32,7 @@ class Imagick {
         }
     }
 
-    public function compress($srcImg,$destImg = '',$quality = '')
+    public function compress($srcImg,$destImg = '',$quality = '',$isDel=1)
     {
         if(filesize($srcImg) < $this->limit * 1024  * 1024){
             return $srcImg;
@@ -64,6 +64,9 @@ class Imagick {
             {
                 $this->obj->clear();
                 $this->obj->destroy();
+                if($isDel) {
+                    unlink($srcImg);
+                }
                 return $destImg;
             }
             return false;
