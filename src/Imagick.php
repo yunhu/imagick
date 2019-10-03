@@ -1,5 +1,5 @@
 <?php
-namespace  Tiki;
+namespace  IM;
 
 
 class Imagick {
